@@ -1,4 +1,4 @@
 import './style.css'
-import startComponents from './components'
+import startIndexPage from './page'
 
-startComponents()
+startIndexPage()

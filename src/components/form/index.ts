@@ -10,14 +10,16 @@ class Form {
   private form: any
   private components: any = { inputWords: undefined, inputKeyWords: undefined }
 
-  private collectionData: string
+  private formType: string
   private formService = formService
   private cryptService = cryptService
 
-  constructor(collectionData: string) {
-    this.collectionData = collectionData
-    this.formService.setCollection(collectionData)
+  constructor(formType: string) {
+    this.formType = formType
+    this.formService.setCollection(formType)
   }
+
+  private setSettings() {}
 
   public async buildComponent() {
     this.form = (await axios.get('/src/components/form/index.html')).data
@@ -40,17 +42,17 @@ class Form {
   private addEvents() {
     this.components.inputWords.addEventListener('input', (event: any) => {
       const value = event.target.value
-      this.formService.saveData(this.collectionData, 'words', value)
+      this.formService.saveData(this.formType, 'words', value)
     })
 
     this.components.inputKeyWords.addEventListener('input', (event: any) => {
       const value = event.target.value
-      this.formService.saveData(this.collectionData, 'keywords', value)
+      this.formService.saveData(this.formType, 'keywords', value)
     })
 
     this.form.addEventListener('submit', async (event: any) => {
       event.preventDefault()
-      const dataToSend = this.formService.getData(this.collectionData)
+      const dataToSend = this.formService.getData(this.formType)
       const dataResponse = (await this.cryptService.encrypt(dataToSend)).data
     })
   }

@@ -1,16 +1,21 @@
-import * as crypt from './crypt.service'
+class FormService {
+  private formCollection: any = {}
 
-const dataForm: { [key: string]: string | number } = {}
+  constructor() {}
 
-export const sendData = (event: any, cryptService: any, dataToCrypt: any) => {
-  event.preventDefault()
-  return crypt[cryptService as 'encrypt'](dataToCrypt)
+  public setCollection(collection: string) {
+    this.formCollection[collection] = {}
+  }
+
+  public saveData(collection: string, keyForm: string, valueForm: string) {
+    this.formCollection[collection][keyForm] = valueForm
+  }
+
+  public getData(collection: string) {
+    return this.formCollection[collection]
+  }
 }
 
-export const saveData = (keyForm: string, valueForm: string | number) => {
-  dataForm[keyForm] = valueForm
-}
+const formService = new FormService()
 
-export const getData = () => {}
-
-export const validateData = () => {}
+export default formService

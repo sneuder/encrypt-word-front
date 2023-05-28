@@ -1,15 +1,21 @@
 import axios from 'axios'
 
-const url = 'http://localhost:8080/api/'
+class Crypt {
+  private url: string = 'http://localhost:8080/api/'
 
-export const encrypt = (dataToEncrypt: any) => {
-  const options = {
-    method: 'post',
-    url: `${url}encrypt`,
-    data: dataToEncrypt,
+  public encrypt(dataToEncrypt: any) {
+    const options = this.getOptions(dataToEncrypt)
+    return axios(options)
   }
 
-  return axios(options)
+  private getOptions(dataToEncrypt: any) {
+    return {
+      method: 'post',
+      url: `${this.url}encrypt`,
+      data: dataToEncrypt,
+    }
+  }
 }
 
-const decrypt = () => {}
+const cryptService = new Crypt()
+export default cryptService

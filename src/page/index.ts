@@ -11,15 +11,18 @@ class Index {
     this.page = (await axios.get('/src/page/index.html')).data
     this.page = parserHTML('index-page', this.page)
 
-    const app = document.getElementById('app')!
     this.addComponents()
-
-    app.appendChild(this.page)
+    this.addToApp()
   }
 
   private async addComponents() {
     const form = await new Form('encrypt').buildComponent()
     await this.page.appendChild(form)
+  }
+
+  private addToApp() {
+    const app = document.getElementById('app')!
+    app.appendChild(this.page)
   }
 }
 

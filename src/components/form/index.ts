@@ -1,34 +1,59 @@
 import axios from 'axios'
 import getInput from '../input'
+
 import parserHTML from '../../features/parserHTML'
-import * as formService from '../../services/form.service'
+
+import formService from '../../services/form.service'
+import cryptService from '../../services/crypt.service'
 
 class Form {
-  public form: any
-  private formType: string = ''
+  private form: any
+  private components: any = { inputWords: undefined, inputKeyWords: undefined }
 
-  constructor(formType: string) {
-    this.formType = formType
+  private collectionData: string
+  private formService = formService
+  private cryptService = cryptService
+
+  constructor(collectionData: string) {
+    this.collectionData = collectionData
+    this.formService.setCollection(collectionData)
   }
 
   public async buildComponent() {
     this.form = (await axios.get('/src/components/form/index.html')).data
     this.form = parserHTML('form', this.form)
 
-    this.addComponents()
+    await this.addComponents()
+    this.addEvents()
 
     return this.form
   }
 
   private async addComponents() {
-    const inputEncrypt = await getInput('Text to encrypt')
-    const inputKeyWord = await getInput('Key Word')
+    this.components.inputWords = await getInput('Text to encrypt')
+    this.components.inputKeyWords = await getInput('Key Word')
 
-    this.form.insertBefore(inputKeyWord, this.form.firstChild)
-    this.form.insertBefore(inputEncrypt, this.form.firstChild)
+    this.form.insertBefore(this.components.inputKeyWords, this.form.firstChild)
+    this.form.insertBefore(this.components.inputWords, this.form.firstChild)
   }
 
-  private addEvents() {}
+  private addEvents() {
+    this.components.inputWords.addEventListener('input', (event: any) => {
+      const value = event.target.value
+      this.formService.saveData(this.collectionData, 'words', value)
+    })
+
+    this.components.inputKeyWords.addEventListener('input', (event: any) => {
+      const value = event.target.value
+      this.formService.saveData(this.collectionData, 'keywords', value)
+    })
+
+    this.form.addEventListener('submit', async (event: any) => {
+      event.preventDefault()
+      const dataToSend = this.formService.getData(this.collectionData)
+      const dataResponse = (await this.cryptService.encrypt(dataToSend)).data
+    })
+  }
 }
 
 export default Form

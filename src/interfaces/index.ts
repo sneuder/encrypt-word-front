@@ -15,3 +15,8 @@ export interface DataResponseEncrypt {
 export interface DataResponseDecrypt {
   decrypt: string
 }
+
+export interface FormCollection {
+  encrypt: DataToEncrypt
+  decrypt: DataToDecrypt
+}

@@ -1,12 +1,23 @@
 import axios from 'axios'
 import parserHTML from '../../features/parserHTML'
 
-function getInput(placeholder: string) {
-  return axios.get('/src/components/input/index.html').then((res) => {
-    const input = parserHTML('inputContainer', res.data) as HTMLElement
-    input.querySelector('#input')!.placeholder = placeholder
-    return input
-  })
+class Input {
+  private input: any
+  private settings = {
+    placeholder: '',
+  }
+
+  constructor(placeholder: string) {
+    this.settings.placeholder = placeholder
+  }
+
+  public async buildComponent() {
+    this.input = await axios.get('/src/components/input/index.html')
+    this.input = parserHTML('inputContainer', this.input.data) as HTMLElement
+    this.input.querySelector('#input')!.placeholder = this.settings.placeholder
+
+    return this.input
+  }
 }
 
-export default getInput
+export default Input

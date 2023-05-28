@@ -1,10 +1,20 @@
+// import { FormCollection } from '../interfaces'
+
+interface FormCollection {
+  [key: string]: { [key: string]: string }
+}
+
 class FormService {
-  private formCollection: any = {}
+  private formCollection: FormCollection = {}
 
   constructor() {}
 
-  public setCollection(collection: string) {
-    this.formCollection[collection] = {}
+  public createCollection(collectionName: string) {
+    this.formCollection[collectionName] = {}
+  }
+
+  public setPropertyCollection(collectionName: string, propertyName: string) {
+    this.formCollection[collectionName][propertyName] = ''
   }
 
   public saveData(collection: string, keyForm: string, valueForm: string) {

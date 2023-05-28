@@ -1,5 +1,6 @@
 import axios from 'axios'
 import parserHTML from '../../services/parserHTML.service'
+
 class Input {
   private input: any
   private settings = {

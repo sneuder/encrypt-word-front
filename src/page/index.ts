@@ -1,6 +1,6 @@
 import axios from 'axios'
 import parserHTML from '../services/parserHTML.service'
-import Form from '../components/form'
+import Tab from '../components/tab'
 
 class Index {
   page: any
@@ -16,8 +16,8 @@ class Index {
   }
 
   private async addComponents() {
-    const form = await new Form('encrypt').buildComponent()
-    await this.page.appendChild(form)
+    const tab = await new Tab().buildComponent()
+    await this.page.appendChild(tab)
   }
 
   private addToApp() {

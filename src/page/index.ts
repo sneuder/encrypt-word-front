@@ -1,24 +1,26 @@
 import axios from 'axios'
 import parserHTML from '../features/parserHTML'
-import getForm from '../components/form'
+import Form from '../components/form'
 
-async function startIndexPage() {
-  try {
-    let page = (await axios.get('/src/page/index.html')).data
-    page = parserHTML('index-page', page)
+class Index {
+  page: any
+
+  constructor() {}
+
+  public async buildComponent() {
+    this.page = (await axios.get('/src/page/index.html')).data
+    this.page = parserHTML('index-page', this.page)
 
     const app = document.getElementById('app')!
-    addComponents(page)
+    this.addComponents()
 
-    app.appendChild(page)
-  } catch (e) {
-    console.log(e)
+    app.appendChild(this.page)
+  }
+
+  private async addComponents() {
+    const form = await new Form('encrypt').buildComponent()
+    await this.page.appendChild(form)
   }
 }
 
-async function addComponents(page: any) {
-  const form = await getForm()
-  page.appendChild(form)
-}
-
-export default startIndexPage
+export default Index

@@ -1,4 +1,4 @@
 import './style.css'
-import startIndexPage from './page'
+import Index from './page'
 
-startIndexPage()
+new Index().buildComponent()

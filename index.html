@@ -7,7 +7,15 @@
     <title>Encrypt</title>
   </head>
   <body>
-    <main id="app"></main>
+    <main id="app">
+      <div id="loader" class="flex items-center justify-center min-h-screen">
+        <div
+          style="border-top-color: transparent"
+          class="w-8 h-8 border-4 border-blue-200 rounded-full animate-spin"
+        ></div>
+        <p class="ml-2">loading...</p>
+      </div>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

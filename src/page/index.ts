@@ -26,6 +26,12 @@ class Index {
   private addToApp() {
     const app = document.getElementById('app')!
     app.appendChild(this.page)
+    this.removeLoader()
+  }
+
+  private removeLoader() {
+    const loader = document.getElementById('loader')
+    loader?.classList.add('hidden')
   }
 }
 

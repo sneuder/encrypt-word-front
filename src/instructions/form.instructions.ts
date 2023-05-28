@@ -3,6 +3,7 @@ const formInstuctions = {
     titleSubmit: 'Encrypt',
     cryptService: 'encrypt',
     collectionData: 'encrypt',
+    responseValue: 'encrypt',
     inputs: [
       {
         name: 'words',
@@ -18,7 +19,9 @@ const formInstuctions = {
   },
   decrypt: {
     titleSubmit: 'Decrypt',
+    cryptService: 'decrypt',
     collectionData: 'decrypt',
+    responseValue: 'decrypt',
     inputs: [
       {
         name: 'encrypted',
@@ -31,7 +34,6 @@ const formInstuctions = {
         type: 'input',
       },
     ],
-    cryptService: 'decrypt',
   },
 }
 

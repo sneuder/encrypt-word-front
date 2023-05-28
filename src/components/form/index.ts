@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import Input from '../input'
 import TextArea from '../textarea'
+import { notification } from '../notification'
 
 import formService from '../../services/form.service'
 import cryptService from '../../services/crypt.service'
@@ -64,14 +65,28 @@ class Form {
 
     this.form.addEventListener('submit', async (event: any) => {
       event.preventDefault()
-      if (!formService.validateData(this.instruction.cryptService)) return
 
+      if (!formService.validateData(this.instruction.cryptService))
+        return notification.showUpAlert('data')
+
+      type cryptServiceType = keyof typeof cryptService
       const dataToSend = formService.getData(this.instruction.cryptService)
-      const dataResponse = (
-        await cryptService[this.instruction.cryptService](dataToSend)
-      ).data
 
-      dataResponse
+      try {
+        const dataResponse = (
+          await cryptService[this.instruction.cryptService as cryptServiceType](
+            dataToSend
+          )
+        ).data
+
+        notification.showUpAlert('success')
+
+        navigator.clipboard.writeText(
+          dataResponse[this.instruction.responseValue]
+        )
+      } catch (err) {
+        notification.showUpAlert('success')
+      }
     })
   }
 }

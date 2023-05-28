@@ -1,6 +1,7 @@
 import axios from 'axios'
 import parserHTML from '../services/parserHTML.service'
 import Tab from '../components/tab'
+import { notification } from '../components/notification'
 
 class Index {
   page: any
@@ -17,7 +18,9 @@ class Index {
 
   private async addComponents() {
     const tab = await new Tab().buildComponent()
+    const builtNotification = await notification.buildComponent()
     await this.page.appendChild(tab)
+    await this.page.appendChild(builtNotification)
   }
 
   private addToApp() {

@@ -4,8 +4,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+        index: './index.html',
         main: './src/main.ts',
-        index: './src/page/index.html',
+        page: './src/page/index.html',
         form: './src/components/form/index.html',
         input: './src/components/input/index.html',
         textarea: './src/components/textarea/index.html',

@@ -14,6 +14,7 @@ class Index {
 
     this.addComponents()
     this.addToApp()
+    this.removeLoader()
   }
 
   private async addComponents() {
@@ -26,7 +27,6 @@ class Index {
   private addToApp() {
     const app = document.getElementById('app')!
     app.appendChild(this.page)
-    this.removeLoader()
   }
 
   private removeLoader() {

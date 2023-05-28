@@ -4,7 +4,8 @@ import { EndPoints } from '../interfaces/enums'
 import { EndPoint } from '../interfaces/types'
 
 class Crypt {
-  private url: string = 'http://localhost:8080/api/'
+  // private url: string = 'http://localhost:8080/api/'
+  private url: string = 'https://encrypt-words.onrender.com/'
 
   public encrypt(dataToEncrypt: any) {
     const options = this.getOptions(dataToEncrypt, EndPoints.ENCRYPT)

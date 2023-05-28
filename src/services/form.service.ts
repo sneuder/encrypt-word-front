@@ -24,6 +24,13 @@ class FormService {
   public getData(collection: string) {
     return this.formCollection[collection]
   }
+
+  public validateData(collection: string) {
+    return Object.values(this.formCollection[collection]).every((value) => {
+      if (value !== '') return true
+      return false
+    })
+  }
 }
 
 const formService = new FormService()

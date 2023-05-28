@@ -1,6 +1,5 @@
 import axios from 'axios'
-import parserHTML from '../../features/parserHTML'
-
+import parserHTML from '../../services/parserHTML.service'
 class Input {
   private input: any
   private settings = {
@@ -13,7 +12,7 @@ class Input {
 
   public async buildComponent() {
     this.input = await axios.get('/src/components/input/index.html')
-    this.input = parserHTML('inputContainer', this.input.data) as HTMLElement
+    this.input = parserHTML.parse('inputContainer', this.input.data)
     this.input.querySelector('#input')!.placeholder = this.settings.placeholder
 
     return this.input

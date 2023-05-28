@@ -1,5 +1,5 @@
 import axios from 'axios'
-import parserHTML from '../../features/parserHTML'
+import parserHTML from '../../services/parserHTML.service'
 
 class TextArea {
   private textArea: any
@@ -13,7 +13,7 @@ class TextArea {
 
   public async buildComponent() {
     this.textArea = await axios.get('/src/components/textarea/index.html')
-    this.textArea = parserHTML('inputContainer', this.textArea.data)
+    this.textArea = parserHTML.parse('inputContainer', this.textArea.data)
 
     this.textArea.querySelector('#textarea')!.placeholder =
       this.settings.placeholder

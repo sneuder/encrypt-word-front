@@ -1,5 +1,5 @@
 import axios from 'axios'
-import parserHTML from '../features/parserHTML'
+import parserHTML from '../services/parserHTML.service'
 import Form from '../components/form'
 
 class Index {
@@ -9,7 +9,7 @@ class Index {
 
   public async buildComponent() {
     this.page = (await axios.get('/src/page/index.html')).data
-    this.page = parserHTML('index-page', this.page)
+    this.page = parserHTML.parse('index-page', this.page)
 
     this.addComponents()
     this.addToApp()

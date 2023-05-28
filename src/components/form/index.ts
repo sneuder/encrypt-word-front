@@ -73,6 +73,8 @@ class Form {
       const dataToSend = formService.getData(this.instruction.cryptService)
 
       try {
+        notification.showUpAlert('waiting')
+
         const dataResponse = (
           await cryptService[this.instruction.cryptService as cryptServiceType](
             dataToSend
@@ -85,7 +87,7 @@ class Form {
           dataResponse[this.instruction.responseValue]
         )
       } catch (err) {
-        notification.showUpAlert('success')
+        notification.showUpAlert('error')
       }
     })
   }

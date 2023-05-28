@@ -22,7 +22,7 @@ const formInstuctions = {
     inputs: [
       {
         name: 'encrypted',
-        placeholder: 'Text to encrypt',
+        placeholder: 'Text to decrypt',
         type: 'textarea',
       },
       {

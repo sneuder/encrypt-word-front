@@ -59,10 +59,24 @@ class Tab {
         `#${globalState.getPreviousTab()}`
       )
       previousTab.classList.add('hidden')
+
+      const currentButton = this.tab.querySelector(
+        `[value=${globalState.getPreviousTab()}]`
+      )
+      currentButton.classList.add('text-indigo-500')
+      currentButton.classList.add('bg-white')
+      currentButton.classList.remove('text-white')
     }
 
     const currentTab = this.tab.querySelector(`#${globalState.getCurrentTab()}`)
     currentTab.classList.remove('hidden')
+
+    const currentButton = this.tab.querySelector(
+      `[value=${globalState.getCurrentTab()}]`
+    )
+    currentButton.classList.remove('text-indigo-500')
+    currentButton.classList.remove('bg-white')
+    currentButton.classList.add('text-white')
   }
 
   private setDefaultTab(defaultTab: string) {

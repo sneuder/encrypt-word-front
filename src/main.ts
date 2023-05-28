@@ -1,4 +1,3 @@
-import './style.css'
-import startComponents from './components'
+import Index from './page'
 
-startComponents()
+new Index().buildComponent()

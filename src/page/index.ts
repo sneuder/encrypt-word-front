@@ -12,7 +12,7 @@ class Index {
     this.page = (await axios.get('/src/page/index.html')).data
     this.page = parserHTML.parse('index-page', this.page)
 
-    this.addComponents()
+    await this.addComponents()
     this.addToApp()
     this.removeLoader()
   }

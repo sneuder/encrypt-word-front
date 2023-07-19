@@ -4,7 +4,7 @@ import Tab from '../components/tab'
 import { notification } from '../components/notification'
 
 class Index {
-  page: any
+  page: any = `<div id="index-page" class="grid h-screen place-items-center p-7 md:p-0"></div>`
 
   constructor() {}
 

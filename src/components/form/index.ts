@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import Input from '../input'
 import TextArea from '../textarea'
 import { notification } from '../notification'
@@ -10,7 +8,16 @@ import formInstuctions from '../../instructions/form.instructions'
 import parserHTML from '../../services/parserHTML.service'
 
 class Form {
-  private form: any
+  private form: any = `
+    <form id="form" class="grid gap-4 grid-cols-1 w-full max-w-lg mx-auto">
+      <button
+        id="submit"
+        type="submit"
+        class="w-2/4 bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
+      ></button>
+    </form>
+  `
+
   private components: any = {}
 
   private inputs = {
@@ -26,7 +33,6 @@ class Form {
   }
 
   public async buildComponent() {
-    this.form = (await axios.get('/src/components/form/index.html')).data
     this.form = parserHTML.parse('form', this.form)
 
     this.form.querySelector('#submit').textContent =
